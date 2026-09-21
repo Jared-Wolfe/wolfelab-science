@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Explore species-specific apparent survival across five tropical bird monitoring stations. Accepted ST-CJS posterior estimates with sampling effort and uncertainty.">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <title>Tropical Bird Demography Atlas · Apparent survival</title>
+  
+  <style>:root{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#243e37;background:#fafbf8;font-synthesis:none;--muted:#5c6d65;--line:#dce3d9;--ink:#243e37}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}a{color:#0072b2}header,main,footer{max-width:1360px;margin:auto;padding-left:56px;padding-right:56px}.masthead{padding-top:26px;padding-bottom:24px;border-bottom:1px solid var(--line)}.masthead>div,footer{display:flex;justify-content:space-between;gap:20px}.brand{font-size:12px;font-weight:750;letter-spacing:2px}.edition{font-size:10px;letter-spacing:1.8px;color:var(--muted)}.intro{display:grid;grid-template-columns:1.25fr 1fr;gap:90px;align-items:center;padding:48px 0 40px}.eyebrow{font-size:10px;font-weight:700;letter-spacing:1.8px;color:var(--muted);margin:0 0 12px}h1{font-family:Georgia,serif;font-weight:400;font-size:49px;line-height:1.08;letter-spacing:-1.5px;margin:0 0 16px}.lede{font-size:14px;line-height:1.7;color:var(--muted);max-width:440px;margin-bottom:0}.search-block{padding:28px 0 12px}.search-block label{display:block;font-size:14px;font-weight:650;margin-bottom:12px}input{width:100%;padding:15px;background:#fff;border:1px solid #889b8f;border-radius:3px;color:var(--ink)}input:focus,select:focus{outline:2px solid #007c65;outline-offset:3px}#search-help,#status{font-size:11px;line-height:1.6;color:var(--muted);margin:9px 0}#status.error{color:#a32916}.species-heading{padding:28px 0 24px;border-top:2px solid var(--ink);display:flex;justify-content:space-between;gap:22px;align-items:center}h2{font-family:Georgia,serif;font-size:34px;font-weight:400;margin:0}#scientific-name{font-size:15px;font-style:italic;margin:6px 0 0;color:var(--muted)}.model-note{display:grid;gap:5px;font-size:11px;color:var(--muted);text-align:right}.model-note strong{font-size:12px;letter-spacing:2px;color:var(--ink)}fieldset{border:0;padding:10px 0 24px;margin:0;display:flex;flex-wrap:wrap;gap:8px}legend{font-size:11px;font-weight:650;margin-bottom:8px}legend span{font-weight:400;color:var(--muted);margin-left:8px}.station-toggle{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--line);background:#fff;border-radius:3px;font-size:12px;cursor:pointer}.station-toggle:has(input:not(:checked)){opacity:.6;background:transparent}.station-toggle input{width:14px;height:14px;accent-color:var(--station);padding:0;margin:0}.station-mark{display:inline-block;width:20px;border-top:3px solid var(--station)}.section-title{display:flex;justify-content:space-between;align-items:baseline;gap:18px}h3{font-size:17px;font-weight:650;margin:0}.section-title>span{font-size:11px;color:var(--muted)}.caption{font-size:12px;color:var(--muted);line-height:1.65;margin:10px 0 18px;max-width:930px}.profile{padding:12px 0 30px}.table-scroll{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:12px;text-align:left;white-space:nowrap}th{font-size:10px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);padding:12px 12px 12px 0}td{padding:14px 12px 14px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}td:first-child{font-weight:650}.country{display:block;font-size:10px;font-weight:400;color:var(--muted);margin-top:4px}.estimate{display:flex;gap:10px;align-items:center}.estimate svg{width:100px;height:23px;flex-shrink:0}.history{padding-top:26px;border-top:1px solid var(--line)}.plot-scroll{overflow-x:auto;overscroll-behavior-x:contain}.plot{min-width:650px}.plot svg{display:block;width:100%;height:auto;overflow:visible}.plot text{font-family:Inter,"Segoe UI",Arial,sans-serif;font-size:11px;fill:var(--muted)}.chart-key{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:9px;margin-top:8px}.gap-swatch{display:inline-block;width:22px;height:12px;background:repeating-linear-gradient(135deg,#fff,#fff 3px,#d3dacf 3px,#d3dacf 5px)}.aligned{margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}select{background:#fff;border:1px solid #aab9ae;border-radius:3px;padding:7px;font-size:12px;color:var(--ink)}.methods{margin-top:36px;border-top:1px solid var(--line)}details{border-bottom:1px solid var(--line);padding:20px 0}summary{cursor:pointer;font-size:13px;font-weight:650}.methods-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}.methods p,.methods dl{font-size:12px;line-height:1.8;color:var(--muted)}.methods dl{display:grid;grid-template-columns:150px 1fr;gap:8px 20px}.methods dt{font-weight:600}.methods dd{margin:0;overflow-wrap:anywhere}footer{padding-top:28px;padding-bottom:30px;font-size:10px;color:var(--muted)}#tooltip{position:fixed;z-index:10;pointer-events:none;max-width:335px;background:#203b32;color:white;padding:13px 16px;border-radius:4px;font-size:12px;line-height:1.7;white-space:pre-line;box-shadow:0 5px 24px #0002}svg [tabindex]:focus{outline:2px solid #243e37;outline-offset:3px}[hidden]{display:none!important}@media(max-width:850px){header,main,footer{padding-left:24px;padding-right:24px}.intro{gap:30px}h1{font-size:41px}.edition{display:none}.section-title>span{display:none}}@media(max-width:600px){header,main,footer{padding-left:18px;padding-right:18px}.brand{font-size:9px;letter-spacing:1.2px}.intro{display:block;padding:30px 0 20px}h1{font-size:38px}.lede{font-size:13px}.search-block{padding-top:24px}h2{font-size:28px}.species-heading{display:block}.model-note{display:flex;flex-wrap:wrap;text-align:left;margin-top:16px;font-size:10px;gap:10px}.methods-grid{display:block}.methods dl{grid-template-columns:1fr;gap:2px}.methods dd{margin-bottom:10px}.section-title{align-items:center}h3{font-size:16px}.station-toggle{padding:8px;font-size:11px}footer{display:block;line-height:2}.estimate svg{width:70px}}
+.methods pre{overflow:auto;font-size:11px;max-width:100%}@media(max-width:600px){.plot{min-width:1000px}.plot-scroll:before{content:"Swipe to explore the full timeline →";display:block;font-size:11px;color:#5c6d65;padding:0 0 10px}.table-scroll:before{content:"Swipe for full data support →";display:block;font-size:11px;color:#5c6d65;padding-bottom:10px}footer span{display:block}}
+.review-notice{font-size:12px;line-height:1.6;color:#765019;background:#f5eddc;padding:12px 16px;border-left:3px solid #b28139;margin:22px 0 0}
+
+.chart-key{flex-wrap:wrap;gap:8px 12px}.support-swatch{display:inline-block;width:18px;height:12px;border:1px solid #c5cdc1}.support-swatch.full{background:#fafbf8}.support-swatch.partial{background:#f0f2ed}.support-swatch.none{background:#e1e4de}.support-help{border:0;padding:5px 0}.support-help p{font-size:12px;line-height:1.8;color:var(--muted);max-width:920px}#tooltip{max-width:380px;max-height:calc(100vh - 16px);overflow:auto}
+
+.station-mark{width:32px;height:10px;border:0}.support-title{font-size:12px;margin:4px 0 8px}.chart-key>span{display:inline-flex;align-items:center;gap:7px}.support-swatch{border-color:#007c6566;background:#007c65}.support-swatch.full{background:#007c65d9}.support-swatch.partial{background:#007c654d}.support-swatch.none{background:repeating-linear-gradient(135deg,#007c6514,#007c6514 3px,#007c6570 3px,#007c6570 4px)}.aligned{margin-top:8px;padding:18px 0}.aligned[open]>summary{margin-bottom:18px}.history fieldset{padding-bottom:10px}.support-help{margin-top:12px}
+</style>
+<meta name="application-name" content="Tropical Bird Demography Atlas — portable review build">
+<style>
+  body.explorer-locked{overflow:hidden;background:#f4f0e6}
+  body.explorer-locked>:not(#accessGate){visibility:hidden!important}
+  .access-gate{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;overflow:auto;padding:28px;background:linear-gradient(145deg,#102a21 0%,#17372b 58%,#244d3c 100%);color:#fffdf7}
+  .access-card{width:min(100%,510px);padding:clamp(30px,6vw,54px);border:1px solid rgba(255,255,255,.24);background:rgba(9,29,21,.8);box-shadow:0 24px 70px rgba(0,0,0,.28);backdrop-filter:blur(12px)}
+  .access-kicker{margin:0 0 18px;color:#e7c775;font-size:.72rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase}
+  .access-card h1{margin:0;font-family:Georgia,serif;font-size:clamp(2.35rem,8vw,4.2rem);font-weight:400;line-height:.96;letter-spacing:-.035em}
+  .access-copy{margin:22px 0 28px;color:rgba(255,255,255,.78);font-size:.96rem;line-height:1.7}
+  .access-form{display:grid;gap:16px}
+  .access-form label{display:grid;gap:7px;color:rgba(255,255,255,.82);font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  .access-form input{width:100%;padding:14px 15px;border:1px solid rgba(255,255,255,.42);border-radius:2px;background:rgba(255,255,255,.09);color:#fff;font-size:1rem}
+  .access-form input:focus{outline:2px solid #e7c775;outline-offset:3px}
+  .access-submit{margin-top:4px;padding:14px 18px;border:1px solid #e7c775;border-radius:2px;background:#e7c775;color:#102a21;font-weight:750;cursor:pointer}
+  .access-submit:hover{background:#f3d98e}
+  .access-message{min-height:1.5em;margin:2px 0 0;color:#ffd2c6;font-size:.86rem;line-height:1.5}
+  .access-return{display:inline-block;margin-top:22px;color:rgba(255,255,255,.76);font-size:.84rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.45)}
+  .access-return:hover{color:#fff}
+  @media(max-width:520px){.access-gate{padding:18px}.access-card{padding:30px 24px}}
+</style>
+</head>
+<body class="explorer-locked">
+<section class="access-gate" id="accessGate" aria-labelledby="accessTitle">
+  <div class="access-card">
+    <p class="access-kicker">Private collaborator preview</p>
+    <h1 id="accessTitle">Tropical Bird Demography Explorer</h1>
+    <p class="access-copy">This research prototype is being shared with project collaborators for review. Enter the shared credentials to continue.</p>
+    <form class="access-form" id="accessForm">
+      <label>Username<input id="accessUsername" name="username" type="text" autocomplete="username" required></label>
+      <label>Password<input id="accessPassword" name="password" type="password" autocomplete="current-password" required></label>
+      <button class="access-submit" type="submit">Open the Explorer</button>
+      <p class="access-message" id="accessMessage" role="status" aria-live="polite"></p>
+    </form>
+    <a class="access-return" href="/resources/">← Return to Wolfe Lab resources</a>
+  </div>
+</section>
+<script>
+(() => {
+  const ACCESS_KEY = 'tbd-atlas-access-v1';
+  const EXPECTED_USER = 'collaborator';
+  const EXPECTED_HASH = 'a7cf50787fb3bc5fd3b8598a15f33cc2ad55c073b90b461104cd20d0578457db';
+  const gate = document.getElementById('accessGate');
+  const form = document.getElementById('accessForm');
+  const message = document.getElementById('accessMessage');
+  const username = document.getElementById('accessUsername');
+  const password = document.getElementById('accessPassword');
+
+  function unlock() {
+    document.body.classList.remove('explorer-locked');
+    gate.hidden = true;
+  }
+
+  async function sha256(value) {
+    const bytes = new TextEncoder().encode(value);
+    const digest = await crypto.subtle.digest('SHA-256', bytes);
+    return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+  }
+
+  if (sessionStorage.getItem(ACCESS_KEY) === 'granted') {
+    unlock();
+  } else {
+    requestAnimationFrame(() => username.focus());
+  }
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    message.textContent = 'Checking access…';
+    const validUser = username.value.trim().toLowerCase() === EXPECTED_USER;
+    const validPassword = await sha256(password.value);
+    if (validUser && validPassword === EXPECTED_HASH) {
+      sessionStorage.setItem(ACCESS_KEY, 'granted');
+      password.value = '';
+      unlock();
+      return;
+    }
+    password.value = '';
+    message.textContent = 'Those credentials were not recognized. Please try again.';
+    password.focus();
+  });
+})();
+</script>
+<header class="masthead"><div><span class="brand">TROPICAL BIRD DEMOGRAPHY ATLAS</span><span class="edition">RESEARCH PROTOTYPE / 01</span></div></header>
+<main>
+  <p class="review-notice" id="label-review">Scientific label review pending · This local candidate uses accepted scientific names. Publication is blocked pending review.</p>
+  <section class="intro"><div><p class="eyebrow">FIVE STATIONS · ONE MONITORING NETWORK</p><h1>Life histories,<br>across the tropics.</h1><p class="lede">Explore apparent survival through time, alongside the field effort and capture histories that inform each estimate.</p></div><div class="search-block"><label for="species-search">Find a species</label><input id="species-search" list="species-list" type="search" placeholder="Accepted scientific name" autocomplete="off" aria-describedby="search-help"><datalist id="species-list"></datalist><p id="search-help">Common-name labels are withheld pending taxonomic review.</p><p id="status" role="status" aria-live="polite">Loading verified summaries…</p></div></section>
+  <div id="explorer" hidden>
+    <section class="species-heading"><div><p class="eyebrow" id="family"></p><h2 id="species-name"></h2><p id="scientific-name"></p></div><div class="model-note"><strong>ST-CJS</strong><span>Accepted production posterior</span><span>Median + 90% credible interval</span></div></section>
+
+    <section class="profile"><div class="section-title"><h3>Long-term apparent survival</h3><span>Station comparison</span></div><p class="caption">Average annual apparent survival over each station’s full monitoring window. Different windows limit direct comparisons. Uncertainty is calculated from within-draw averages, including unsampled intervals.</p><div class="table-scroll"><table><thead><tr><th>Monitoring station</th><th>Median · 90% credible interval</th><th>Period</th><th>Individuals</th><th>Recaptured later</th><th>Sampled years</th><th>Total net-hours</th></tr></thead><tbody id="profile-body"></tbody></table></div></section>
+    <section class="history"><div class="section-title"><h3>Annual apparent-survival history</h3><span>Posterior median & 90% credible band</span></div><p class="caption">All valid modeled intervals are shown at their <strong>start year</strong>, with posterior medians and 90% credible bands. Local sampling support appears below. Estimates with limited or no local sampling draw on the hierarchical model and broader encounter histories; interpret them with additional caution. Hover, tap, or focus a mark for details.</p>    <fieldset id="station-toggles"><legend>Monitored populations <span>Choose stations to compare</span></legend></fieldset><p id="empty-stations" hidden>Select at least one monitoring station to view its history.</p><div class="plot-scroll"><div id="survival-chart" class="plot"></div></div><h4 class="support-title">Local sampling support</h4><div class="plot-scroll"><div id="support-chart" class="plot"></div></div><div class="chart-key" aria-label="Sampling support legend"><span><i class="support-swatch full"></i>Full local support</span><span><i class="support-swatch partial"></i>Partial local support</span><span><i class="support-swatch none"></i>No local sampling</span></div><details class="support-help"><summary>How to interpret local sampling support</summary><p>Tile colors identify stations; intensity and hatching identify sampling support. Full means both adjacent occasions were sampled; partial means one was sampled; no local sampling means neither was sampled. Tiles are centered at the same interval start year as their survival estimates. These annotations do not measure posterior precision and never hide estimates. During occasions with no accepted effort, detection probability was fixed at zero. Apparent survival remains estimated by the hierarchical model and broader encounter histories. All displayed values are posterior model estimates, including those with sampling at both endpoints.</p></details></section>
+    <details class="aligned" id="effort-details"><summary>Sampling effort · usable 12-m net-hours</summary><p class="caption">Each bar represents accepted usable effort in a sampling year. Open circles on the baseline mean exactly 0 net-hours. All rows share the same effort scale and calendar axis as the apparent-survival figure. The accepted inputs contain no missing effort values.</p><div class="plot-scroll"><div id="effort-chart" class="plot"></div></div></details>
+    <details class="aligned" id="capture-details"><summary>Capture support · individuals and recaptures</summary><div class="section-title"><label class="metric-label" for="capture-metric"><select id="capture-metric"><option value="n_individuals">Individuals captured</option><option value="n_interannual_recaptures">Interannual recaptures</option></select></label></div><p class="caption">Darker cells indicate more individuals recorded; counts describe encounter support, not abundance. Interannual recaptures count individuals encountered that year who had been encountered in an earlier year.</p><div class="plot-scroll"><div id="capture-chart" class="plot"></div></div></details>
+    <section class="methods"><details open><summary>Reading apparent survival</summary><div class="methods-grid"><p>Apparent survival describes the probability that an individual survives and remains available to the monitored population between sampling occasions. Mortality and permanent emigration cannot generally be distinguished.</p><p>Populations with more information are estimated primarily from their own capture histories, while populations with less information borrow statistical strength from the broader monitoring network. ST-CJS allows species to have their own annual trajectories within stations.</p></div></details><details id="provenance"><summary>Model & provenance</summary><div id="provenance-content"></div></details></section>
+  </div>
+</main>
+<footer><span>Tropical Bird Demography Atlas</span><span>Descriptive exploration · Apparent survival only</span></footer>
+<div id="tooltip" role="tooltip" hidden></div>
+
+<script>
+
+// All valid modeled intervals remain continuous, irrespective of local sampling support.
+function segments(rows) {
+  const result=[]; let current=[];
+  for(const row of rows) {
+    if(!row.model_interval_valid || !row.display_survival){if(current.length)result.push(current);current=[];continue;}
+    if(current.length && current.at(-1).year_end!==row.year_start){result.push(current);current=[];}
+    current.push(row);
+  }
+  if(current.length)result.push(current);
+  return result;
+}
+const escape = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const W=1160,L=150,R=30;
+function xScale(lo,hi){return year=>L+(year-lo)/(hi-lo)*(W-L-R);}
+function frame(content,height,label){return `<svg viewBox="0 0 ${W} ${height}" role="img" aria-label="${escape(label)}"><defs><pattern id="hatch-${label.replace(/\W/g,'')}" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M-1 1L1-1M0 6L6 0M5 7L7 5" stroke="#b4bfb2" stroke-width="1"/></pattern></defs>${content}</svg>`;}
+function axis(x,lo,hi,y){let out='';for(let year=Math.ceil(lo/5)*5;year<=hi && x(year)<=W-R;year+=5)out+=`<text x="${x(year)}" y="${y}" text-anchor="middle">${year}</text>`;return out+`<text x="${(W+L-R)/2}" y="${y+26}" text-anchor="middle">Calendar year / annual interval start</text>`;}
+function tip(text){return `tabindex="0" data-tip="${escape(text)}" aria-label="${escape(text)}"`;}
+
+const $=id=>document.getElementById(id),fmt=n=>Number(n).toLocaleString('en-US',{maximumFractionDigits:1}),prob=n=>Number(n).toFixed(3);
+let index,provenance,data,enabled=new Set(),request=0;
+const cache=new Map();
+async function json(url){const response=await fetch(url,{cache:'no-store'});if(!response.ok)throw Error(`Data unavailable: ${url}`);return response.json();}
+const label=sp=>sp.common_name?`${sp.common_name} — ${sp.scientific_name}`:sp.scientific_name;
+const station=id=>index.stations.find(s=>s.station_id===id);
+function estimate(r){return `${prob(r.median)} [${prob(r.q05)}–${prob(r.q95)}]`;}
+const supportLabel={FULL_LOCAL_SUPPORT:'Full local support · both adjacent occasions sampled',PARTIAL_LOCAL_SUPPORT:'Partial local support · one adjacent occasion sampled',NO_LOCAL_SUPPORT:'No local sampling — model-estimated interval'};
+function annualTip(r){const s=station(r.station_id);return `${label(data.species)}\n${s.station_name} · ${r.year_start}–${r.year_end}\nApparent survival: ${prob(r.median)}\n90% credible interval: ${prob(r.q05)}–${prob(r.q95)}\nSampling support: ${supportLabel[r.interval_support_class]}\n${r.support_warning}\n${r.year_start}: ${fmt(r.start_net_hours)} net-hours · ${r.start_sampled?'Sampled':'No sampling'}\n${r.year_end}: ${fmt(r.end_net_hours)} net-hours · ${r.end_sampled?'Sampled':'No sampling'}\nStart-year individuals captured: ${r.n_individuals}\nStart-year interannual recaptures: ${r.n_interannual_recaptures}`;}
+function render(){
+  $('tooltip').hidden=true;
+  const visible=data.support.filter(r=>enabled.has(r.station_id)),ss=visible.map(r=>station(r.station_id));
+  $('empty-stations').hidden=ss.length>0;
+  $('profile-body').innerHTML=visible.map(r=>{const s=station(r.station_id),a=data.long_term.find(z=>z.station_id===r.station_id);return `<tr data-station="${s.station_id}"><td style="color:${s.color}">${escape(s.station_name)}<span class="country">${s.country}</span></td><td><div class="estimate"><svg viewBox="0 0 100 23" aria-hidden="true"><path d="M0 12H100" stroke="#dce3d9"/><path d="M${a.q05*100} 12H${a.q95*100}" stroke="${s.color}" stroke-width="3"/><circle cx="${a.median*100}" cy="12" r="4" fill="${s.color}"/></svg><span>${estimate(a)}</span></div></td><td>${r.year_start}–${r.year_end}</td><td>${fmt(r.n_individuals)}</td><td>${fmt(r.n_recaptured)}</td><td>${r.years_sampled}</td><td>${fmt(r.total_net_hours)}</td></tr>`}).join('');
+  // Fixed range for the selected species, independent of station toggling; all panels align.
+  const lo=Math.min(...data.effort.map(r=>r.year)),hi=Math.max(...data.effort.map(r=>r.year))+1,x=xScale(lo-.5,hi-.5),step=x(lo+1)-x(lo);
+  const top=24,bottom=300,y=p=>bottom-p*(bottom-top);
+  const alignedFrame=(content,height,label)=>frame(content,height,label).replace('<svg ',`<svg data-x-domain="${lo-.5},${hi-.5}" `);
+  let g='<g data-combined-survival="true">',u='';
+  for(const p of [0,.25,.5,.75,1])g+=`<path d="M${L} ${y(p)}H${W-R}" stroke="#dce3d9"/><text x="${L-12}" y="${y(p)+4}" text-anchor="end">${p.toFixed(2)}</text>`;
+  g+=`<text transform="translate(45 165) rotate(-90)" text-anchor="middle">Apparent survival</text>`;
+  // Draw every ribbon before every trajectory so later ribbons cannot obscure lines.
+  let lines='';
+  ss.forEach((s,i)=>{
+    const rows=data.annual.filter(r=>r.station_id===s.station_id).sort((a,b)=>a.year_start-b.year_start);
+    for(const seg of segments(rows)){
+      const upper=seg.map(r=>`${x(r.year_start)},${y(r.q95)}`),lower=seg.toReversed().map(r=>`${x(r.year_start)},${y(r.q05)}`);
+      g+=`<path data-band="${s.station_id}" data-years="${seg.map(r=>r.year_start)}" d="M${[...upper,...lower].join('L')}Z" fill="${s.color}" fill-opacity=".12" style="pointer-events:none"/>`;
+      lines+=`<path data-trajectory="${s.station_id}" data-years="${seg.map(r=>r.year_start)}" d="M${seg.map(r=>`${x(r.year_start)},${y(r.median)}`).join('L')}" fill="none" stroke="${s.color}" stroke-width="2" stroke-dasharray="${s.dash}" style="pointer-events:none"/>`;
+      for(const r of seg)lines+=`<path data-interval="${s.station_id}:${r.year_start}" d="M${x(r.year_start)} ${y(r.q05)}V${y(r.q95)}" stroke="${s.color}" opacity=".2" style="pointer-events:none"/><circle data-estimate="${s.station_id}:${r.year_start}" cx="${x(r.year_start)}" cy="${y(r.median)}" r="3" fill="${s.color}" ${tip(annualTip(r))}/>`;
+    }
+    const cy=8+i*34;
+    u+=`<defs><pattern id="support-hatch-${s.station_id}" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M-1 1L1-1M0 6L6 0M5 7L7 5" stroke="${s.color}" stroke-opacity=".45"/></pattern></defs><g data-support-row="${s.station_id}"><text x="${L-14}" y="${cy+18}" text-anchor="end" style="fill:${s.color};font-weight:650">${escape(s.station_name)}</text>`;
+    for(const r of rows){
+      const opacity={FULL_LOCAL_SUPPORT:.85,PARTIAL_LOCAL_SUPPORT:.3,NO_LOCAL_SUPPORT:.08}[r.interval_support_class];
+      u+=`<g data-support-tile="${s.station_id}:${r.year_start}" data-support-class="${r.interval_support_class}" data-color="${s.color}" data-x="${x(r.year_start)}" ${tip(annualTip(r))}><rect x="${x(r.year_start)-step*.44}" y="${cy}" width="${step*.88}" height="26" fill="${s.color}" fill-opacity="${opacity}" stroke="${s.color}" stroke-opacity=".4"/>`;
+      if(r.interval_support_class==='NO_LOCAL_SUPPORT')u+=`<rect data-support-hatch="true" x="${x(r.year_start)-step*.44}" y="${cy}" width="${step*.88}" height="26" fill="url(#support-hatch-${s.station_id})"/>`;
+      u+='</g>';
+    }
+    u+='</g>';
+  });
+  g+=lines+'</g>'+axis(x,lo,hi,325);
+  $('survival-chart').innerHTML=alignedFrame(g,365,'Combined apparent survival history');
+  u+=axis(x,lo,hi,ss.length*34+30);
+  $('support-chart').innerHTML=alignedFrame(u,ss.length*34+68,'Local sampling support by station');
+  const max=Math.max(...data.effort.map(r=>r.net_hours));let e='';
+  ss.forEach((s,i)=>{const baseline=30+i*82+50;
+    e+=`<text x="${L-12}" y="${baseline-23}" text-anchor="end" style="fill:${s.color}">${escape(s.station_name)}</text><text x="${L-12}" y="${baseline-7}" text-anchor="end" style="font-size:9px">0–${fmt(max)} net-hours</text><path d="M${L} ${baseline}H${W-R}" stroke="#dce3d9"/>`;
+    for(const r of data.effort.filter(r=>r.station_id===s.station_id)){
+      const height=r.net_hours/max*48;
+      const detail=tip(`${s.station_name} · ${r.year}\n${fmt(r.net_hours)} usable 12-m net-hours\n${r.sampled?'Sampled: yes':'No local sampling · 0 net-hours'}`);
+      e+=r.sampled?`<rect data-effort="${s.station_id}:${r.year}" data-net-hours="${r.net_hours}" x="${x(r.year)-step*.35}" y="${baseline-height}" width="${step*.7}" height="${height}" fill="${s.color}" opacity=".75" ${detail}/>`:`<circle data-effort="${s.station_id}:${r.year}" data-net-hours="0" cx="${x(r.year)}" cy="${baseline}" r="2.5" fill="#fafbf8" stroke="#88948a" ${detail}/>`;
+    }
+  });e+=axis(x,lo,hi,ss.length*82+30);$('effort-chart').innerHTML=frame(e,ss.length*82+72,'Sampling effort');
+  const metric=$('capture-metric').value,metricLabel=$('capture-metric').selectedOptions[0].textContent,cm=Math.max(1,...data.capture.map(r=>r[metric]));let c='';
+  ss.forEach((s,i)=>{const cy=16+i*35;c+=`<text x="${L-12}" y="${cy+16}" text-anchor="end" style="fill:${s.color}">${escape(s.station_name)}</text>`;
+    for(const r of data.capture.filter(r=>r.station_id===s.station_id)){
+      const sampled=data.effort.find(z=>z.station_id===s.station_id&&z.year===r.year).sampled;
+      c+=`<rect x="${x(r.year)-step*.4}" y="${cy}" width="${step*.8}" height="24" fill="${sampled?s.color:'url(#hatch-Capturesupport)'}" fill-opacity="${sampled?.08+.92*r[metric]/cm:1}" stroke="${s.color}" stroke-opacity=".18" ${tip(`${label(data.species)}\n${s.station_name} · ${r.year}\n${metricLabel}: ${r[metric]}\n${sampled?'Sampled: yes':'No sampling'}`)}/>`;
+    }
+  });c+=axis(x,lo,hi,ss.length*35+45);c+=`<text x="${L}" y="${ss.length*35+95}">Color intensity: 0–${cm} ${metricLabel.toLowerCase()} · hatched cells: no sampling</text>`;$('capture-chart').innerHTML=frame(c,ss.length*35+110,'Capture support');
+}
+async function choose(sp){
+  const token=++request;$('status').textContent='Loading species…';$('status').classList.remove('error');
+  try{let next=cache.get(sp.species_id);if(!next){next=await json(`./data/species/${sp.species_id}.json`);cache.set(sp.species_id,next);}if(token!==request)return;data=next;
+    enabled=new Set(data.support.map(r=>r.station_id));$('family').textContent=sp.family||'ACCEPTED MODEL SPECIES';$('species-name').textContent=sp.common_name||sp.scientific_name;$('scientific-name').textContent=sp.common_name?sp.scientific_name:'Accepted scientific identity · common-name review pending';
+    $('station-toggles').innerHTML='<legend>Station legend <span>Toggle stations in all views</span></legend>'+data.support.map(r=>{const s=station(r.station_id);return `<label class="station-toggle" style="--station:${s.color}"><input type="checkbox" checked value="${s.station_id}" aria-label="Show ${escape(s.station_name)}"><svg class="station-mark" viewBox="0 0 32 10" aria-hidden="true"><path d="M0 5H32" stroke="${s.color}" stroke-width="3" stroke-dasharray="${s.dash}"/></svg>${escape(s.station_name)}</label>`}).join('');
+    $('species-search').value=label(sp);$('explorer').hidden=false;$('status').textContent=`${data.support.length} eligible ${data.support.length===1?'population':'populations'} · ${index.species.length} species in the Atlas`;
+    history.replaceState(null,'',`#species=${sp.species_id}`);render();
+  }catch(err){if(token===request){$('status').textContent=`Data unavailable. ${err.message}`;$('status').classList.add('error');$('explorer').hidden=true;}}
+}
+$('station-toggles').addEventListener('change',e=>{if(e.target.checked)enabled.add(e.target.value);else enabled.delete(e.target.value);render();});
+$('capture-metric').addEventListener('change',render);
+document.querySelectorAll('.plot-scroll').forEach(panel=>panel.addEventListener('scroll',()=>{
+  document.querySelectorAll('.plot-scroll').forEach(other=>{if(other!==panel&&other.scrollLeft!==panel.scrollLeft)other.scrollLeft=panel.scrollLeft;});
+}));
+document.querySelectorAll('details.aligned').forEach(panel=>panel.addEventListener('toggle',()=>{if(panel.open)panel.querySelector('.plot-scroll').scrollLeft=$('survival-chart').parentElement.scrollLeft;}));
+$('species-search').addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();const found=index?.species.find(s=>[label(s),s.scientific_name,s.common_name||''].some(v=>v.toLowerCase()===q));if(found)choose(found);else $('status').textContent=q?'Choose a matching species from the suggestions.':'Enter an accepted scientific name.';});
+function showTip(target,event){const node=target.closest('[data-tip]');if(!node)return;const t=$('tooltip');t.textContent=node.dataset.tip;t.hidden=false;const rect=node.getBoundingClientRect();let left=(event?.clientX??rect.x)+15,top=(event?.clientY??rect.y)+15;const box=t.getBoundingClientRect();t.style.left=Math.max(8,Math.min(left,innerWidth-box.width-10))+'px';t.style.top=Math.max(8,Math.min(top,innerHeight-box.height-10))+'px';}
+document.addEventListener('pointerover',e=>showTip(e.target,e));document.addEventListener('focusin',e=>showTip(e.target));document.addEventListener('click',e=>{if(e.target.closest('[data-tip]'))showTip(e.target,e);else $('tooltip').hidden=true;});document.addEventListener('pointerout',()=>{$('tooltip').hidden=true;});document.addEventListener('focusout',()=>{$('tooltip').hidden=true;});document.addEventListener('keydown',e=>{if(e.key==='Escape')$('tooltip').hidden=true;});
+(async()=>{
+try{
+  [index,provenance]=await Promise.all([json('./data/index.json'),json('./data/provenance.json')]);
+  if(provenance.status!=='PRODUCTION PASS'||provenance.accepted_attempt!==2)throw Error('Accepted posterior validation failed');
+  $('species-list').innerHTML=index.species.map(s=>`<option value="${escape(label(s))}"></option>`).join('');
+  const fields={'Model':provenance.model,'Metric':'Apparent survival','Status':provenance.status,'Accepted fit':provenance.fit_version,'Retained draws':fmt(provenance.retained_draws),'Sampling Git SHA':provenance.git_sha,'Model SHA-256':provenance.model_sha,'Data SHA-256':provenance.data_sha,'Portable fit SHA-256':provenance.portable_fit_sha,'Research storage':provenance.research_root,'Updated':provenance.updated_date,'Interval support':provenance.support_rule,'Long-term estimate':provenance.long_term_rule,'QA':`0 divergences · 0 maximum-treedepth hits · max R-hat ${Number(provenance.qa.max_rhat).toFixed(4)} · minimum bulk ESS ${Number(provenance.qa.min_bulk).toFixed(1)}`};
+  $('provenance-content').innerHTML='<dl>'+Object.entries(fields).map(([k,v])=>`<dt>${escape(k)}</dt><dd>${escape(v)}</dd>`).join('')+`</dl><p>Candidate common names and families were obtained by exact-name matching to <a href="${escape(provenance.taxonomy_source)}">Cornell’s eBird taxonomy</a>, retrieved 21 September 2026. An exact-name match does not establish matching taxonomic scope after splits or lumps. All common-name candidates are withheld pending scientific review. No taxonomic reassignment was made.</p><details><summary>Extraction software versions</summary><pre>${escape(provenance.software.join('\n'))}</pre></details>`;
+  const wanted=Number(new URLSearchParams(location.hash.slice(1)).get('species'));await choose(index.species.find(s=>s.species_id===wanted)||index.species.find(s=>s.scientific_name==='Glyphorynchus spirurus')||index.species[0]);
+}catch(err){$('status').textContent=`Unable to load the Atlas: ${err.message}. Please refresh the page or contact the project team.`;$('status').classList.add('error');}
+})();
+
+</script>
+</body></html>
