@@ -242,7 +242,24 @@ document.querySelectorAll('.plot-scroll').forEach(panel=>panel.addEventListener(
 }));
 document.querySelectorAll('details.aligned').forEach(panel=>panel.addEventListener('toggle',()=>{if(panel.open)panel.querySelector('.plot-scroll').scrollLeft=$('survival-chart').parentElement.scrollLeft;}));
 speciesSearch.addEventListener('focus',()=>{openSpeciesMenu({showAll:true});speciesSearch.select();});
-speciesSearch.addEventListener('input',e=>{request++;const q=e.target.value.trim();const matches=matchingSpecies(q);renderSpeciesOptions(matches);speciesOptions.hidden=false;speciesSearch.setAttribute('aria-expanded','true');speciesMenuToggle.setAttribute('aria-expanded','true');speciesMenuToggle.setAttribute('aria-label','Close species menu');$('status').textContent=q?(matches.length?`${matches.length} matching species · choose one to load it.`:'No species match that name.'):`${index.species.length} species available · begin typing or choose from the list.`;});
+speciesSearch.addEventListener('input',e=>{
+  request++;
+  data=null;
+  enabled.clear();
+  $('explorer').hidden=true;
+  $('tooltip').hidden=true;
+  history.replaceState(null,'',location.pathname+location.search);
+  const q=e.target.value.trim(),matches=matchingSpecies(q);
+  renderSpeciesOptions(matches);
+  speciesOptions.hidden=false;
+  speciesSearch.setAttribute('aria-expanded','true');
+  speciesMenuToggle.setAttribute('aria-expanded','true');
+  speciesMenuToggle.setAttribute('aria-label','Close species menu');
+  $('status').classList.remove('error');
+  $('status').textContent=q
+    ? (matches.length?'Select a species from the list to load its results.':'No species match that name.')
+    : `${index.species.length} species available · begin typing or choose from the list.`;
+});
 speciesSearch.addEventListener('keydown',e=>{
   if(e.key==='ArrowDown'){e.preventDefault();if(speciesOptions.hidden)openSpeciesMenu({showAll:true});setActiveSpecies(activeSpeciesIndex+1);}
   else if(e.key==='ArrowUp'){e.preventDefault();if(speciesOptions.hidden)openSpeciesMenu({showAll:true});setActiveSpecies(activeSpeciesIndex<0?visibleSpecies.length-1:activeSpeciesIndex-1);}
