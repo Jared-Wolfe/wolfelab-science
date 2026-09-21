@@ -13,6 +13,8 @@
 .chart-key{flex-wrap:wrap;gap:8px 12px}.support-swatch{display:inline-block;width:18px;height:12px;border:1px solid #c5cdc1}.support-swatch.full{background:#fafbf8}.support-swatch.partial{background:#f0f2ed}.support-swatch.none{background:#e1e4de}.support-help{border:0;padding:5px 0}.support-help p{font-size:12px;line-height:1.8;color:var(--muted);max-width:920px}#tooltip{max-width:380px;max-height:calc(100vh - 16px);overflow:auto}
 
 .station-mark{width:32px;height:10px;border:0}.support-title{font-size:12px;margin:4px 0 8px}.chart-key>span{display:inline-flex;align-items:center;gap:7px}.support-swatch{border-color:#007c6566;background:#007c65}.support-swatch.full{background:#007c65d9}.support-swatch.partial{background:#007c654d}.support-swatch.none{background:repeating-linear-gradient(135deg,#007c6514,#007c6514 3px,#007c6570 3px,#007c6570 4px)}.aligned{margin-top:8px;padding:18px 0}.aligned[open]>summary{margin-bottom:18px}.history fieldset{padding-bottom:10px}.support-help{margin-top:12px}
+
+.species-combobox{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 48px}.species-combobox input{min-width:0;border-radius:3px 0 0 3px}.species-menu-toggle{display:grid;place-items:center;border:1px solid #889b8f;border-left:0;border-radius:0 3px 3px 0;background:#fff;color:var(--ink);font-size:20px;line-height:1;cursor:pointer}.species-menu-toggle:hover{background:#f0f4ef}.species-menu-toggle:focus{position:relative;outline:2px solid #007c65;outline-offset:3px}.species-options{position:absolute;z-index:60;top:calc(100% + 6px);left:0;right:0;max-height:min(360px,50vh);overflow-y:auto;margin:0;padding:6px;list-style:none;border:1px solid #889b8f;border-radius:3px;background:#fff;box-shadow:0 14px 34px #19332926}.species-option{display:block;width:100%;padding:11px 12px;border:0;border-radius:2px;background:transparent;color:var(--ink);text-align:left;line-height:1.35;cursor:pointer}.species-option:hover,.species-option[aria-selected="true"]{background:#e4eee8}.species-empty{padding:12px;color:var(--muted);font-size:12px}@media(max-width:600px){.species-options{max-height:44vh}.species-option{padding:13px 11px}}
 </style>
 <meta name="application-name" content="Tropical Bird Demography Atlas — portable review build">
 <style>
@@ -98,7 +100,7 @@
 <header class="masthead"><div><span class="brand">TROPICAL BIRD DEMOGRAPHY ATLAS</span><span class="edition">RESEARCH PROTOTYPE / 01</span></div></header>
 <main>
   <p class="review-notice" id="label-review">Scientific label review pending · This local candidate uses accepted scientific names. Publication is blocked pending review.</p>
-  <section class="intro"><div><p class="eyebrow">FIVE STATIONS · ONE MONITORING NETWORK</p><h1>Life histories,<br>across the tropics.</h1><p class="lede">Explore apparent survival through time, alongside the field effort and capture histories that inform each estimate.</p></div><div class="search-block"><label for="species-search">Find a species</label><input id="species-search" list="species-list" type="search" placeholder="Accepted scientific name" autocomplete="off" aria-describedby="search-help"><datalist id="species-list"></datalist><p id="search-help">Common-name labels are withheld pending taxonomic review.</p><p id="status" role="status" aria-live="polite">Loading verified summaries…</p></div></section>
+  <section class="intro"><div><p class="eyebrow">FIVE STATIONS · ONE MONITORING NETWORK</p><h1>Life histories,<br>across the tropics.</h1><p class="lede">Explore apparent survival through time, alongside the field effort and capture histories that inform each estimate.</p></div><div class="search-block"><label for="species-search">Find a species</label><div class="species-combobox"><input id="species-search" type="search" placeholder="Accepted scientific name" autocomplete="off" aria-describedby="search-help" role="combobox" aria-autocomplete="list" aria-controls="species-options" aria-expanded="false"><button class="species-menu-toggle" id="species-menu-toggle" type="button" aria-label="Show all species" aria-controls="species-options" aria-expanded="false"><span aria-hidden="true">⌄</span></button><ul class="species-options" id="species-options" role="listbox" aria-label="Available species" hidden></ul></div><p id="search-help">Open the menu to browse all species, or begin typing to filter the list. Common-name labels are withheld pending taxonomic review.</p><p id="status" role="status" aria-live="polite">Loading verified summaries…</p></div></section>
   <div id="explorer" hidden>
     <section class="species-heading"><div><p class="eyebrow" id="family"></p><h2 id="species-name"></h2><p id="scientific-name"></p></div><div class="model-note"><strong>ST-CJS</strong><span>Accepted production posterior</span><span>Median + 90% credible interval</span></div></section>
 
@@ -138,6 +140,36 @@ const cache=new Map();
 async function json(url){const response=await fetch(url,{cache:'no-store'});if(!response.ok)throw Error(`Data unavailable: ${url}`);return response.json();}
 const label=sp=>sp.common_name?`${sp.common_name} — ${sp.scientific_name}`:sp.scientific_name;
 const station=id=>index.stations.find(s=>s.station_id===id);
+const speciesSearch=$('species-search'),speciesOptions=$('species-options'),speciesMenuToggle=$('species-menu-toggle');
+let visibleSpecies=[],activeSpeciesIndex=-1;
+function matchingSpecies(query=''){
+  const q=query.toLowerCase().trim();
+  if(!q)return index?.species||[];
+  return (index?.species||[]).filter(sp=>[label(sp),sp.scientific_name,sp.common_name||''].some(value=>value.toLowerCase().includes(q)));
+}
+function setActiveSpecies(next){
+  if(!visibleSpecies.length){activeSpeciesIndex=-1;speciesSearch.removeAttribute('aria-activedescendant');return;}
+  activeSpeciesIndex=Math.max(0,Math.min(next,visibleSpecies.length-1));
+  speciesOptions.querySelectorAll('[role="option"]').forEach((option,i)=>option.setAttribute('aria-selected',String(i===activeSpeciesIndex)));
+  const active=speciesOptions.querySelector(`[data-option-index="${activeSpeciesIndex}"]`);
+  if(active){speciesSearch.setAttribute('aria-activedescendant',active.id);active.scrollIntoView({block:'nearest'});}
+}
+function renderSpeciesOptions(species){
+  visibleSpecies=species;activeSpeciesIndex=-1;speciesSearch.removeAttribute('aria-activedescendant');
+  if(!species.length){speciesOptions.innerHTML='<li class="species-empty">No species match that name.</li>';return;}
+  speciesOptions.innerHTML=species.map((sp,i)=>`<li role="option" id="species-option-${sp.species_id}" data-option-index="${i}" data-species-id="${sp.species_id}" aria-selected="false"><button class="species-option" type="button" tabindex="-1">${escape(label(sp))}</button></li>`).join('');
+}
+function openSpeciesMenu({showAll=false}={}){
+  if(!index)return;
+  renderSpeciesOptions(matchingSpecies(showAll?'':speciesSearch.value));
+  speciesOptions.hidden=false;speciesSearch.setAttribute('aria-expanded','true');speciesMenuToggle.setAttribute('aria-expanded','true');speciesMenuToggle.setAttribute('aria-label','Close species menu');
+}
+function closeSpeciesMenu(){
+  speciesOptions.hidden=true;speciesSearch.setAttribute('aria-expanded','false');speciesMenuToggle.setAttribute('aria-expanded','false');speciesMenuToggle.setAttribute('aria-label','Show all species');speciesSearch.removeAttribute('aria-activedescendant');activeSpeciesIndex=-1;
+}
+function selectSpecies(sp){
+  if(!sp)return;closeSpeciesMenu();choose(sp);
+}
 function estimate(r){return `${prob(r.median)} [${prob(r.q05)}–${prob(r.q95)}]`;}
 const supportLabel={FULL_LOCAL_SUPPORT:'Full local support · both adjacent occasions sampled',PARTIAL_LOCAL_SUPPORT:'Partial local support · one adjacent occasion sampled',NO_LOCAL_SUPPORT:'No local sampling — model-estimated interval'};
 function annualTip(r){const s=station(r.station_id);return `${label(data.species)}\n${s.station_name} · ${r.year_start}–${r.year_end}\nApparent survival: ${prob(r.median)}\n90% credible interval: ${prob(r.q05)}–${prob(r.q95)}\nSampling support: ${supportLabel[r.interval_support_class]}\n${r.support_warning}\n${r.year_start}: ${fmt(r.start_net_hours)} net-hours · ${r.start_sampled?'Sampled':'No sampling'}\n${r.year_end}: ${fmt(r.end_net_hours)} net-hours · ${r.end_sampled?'Sampled':'No sampling'}\nStart-year individuals captured: ${r.n_individuals}\nStart-year interannual recaptures: ${r.n_interannual_recaptures}`;}
@@ -195,11 +227,11 @@ function render(){
   });c+=axis(x,lo,hi,ss.length*35+45);c+=`<text x="${L}" y="${ss.length*35+95}">Color intensity: 0–${cm} ${metricLabel.toLowerCase()} · hatched cells: no sampling</text>`;$('capture-chart').innerHTML=frame(c,ss.length*35+110,'Capture support');
 }
 async function choose(sp){
-  const token=++request;$('status').textContent='Loading species…';$('status').classList.remove('error');
+  const token=++request;speciesSearch.value=label(sp);$('status').textContent='Loading species…';$('status').classList.remove('error');
   try{let next=cache.get(sp.species_id);if(!next){next=await json(`./data/species/${sp.species_id}.json`);cache.set(sp.species_id,next);}if(token!==request)return;data=next;
     enabled=new Set(data.support.map(r=>r.station_id));$('family').textContent=sp.family||'ACCEPTED MODEL SPECIES';$('species-name').textContent=sp.common_name||sp.scientific_name;$('scientific-name').textContent=sp.common_name?sp.scientific_name:'Accepted scientific identity · common-name review pending';
     $('station-toggles').innerHTML='<legend>Station legend <span>Toggle stations in all views</span></legend>'+data.support.map(r=>{const s=station(r.station_id);return `<label class="station-toggle" style="--station:${s.color}"><input type="checkbox" checked value="${s.station_id}" aria-label="Show ${escape(s.station_name)}"><svg class="station-mark" viewBox="0 0 32 10" aria-hidden="true"><path d="M0 5H32" stroke="${s.color}" stroke-width="3" stroke-dasharray="${s.dash}"/></svg>${escape(s.station_name)}</label>`}).join('');
-    $('species-search').value=label(sp);$('explorer').hidden=false;$('status').textContent=`${data.support.length} eligible ${data.support.length===1?'population':'populations'} · ${index.species.length} species in the Atlas`;
+    $('explorer').hidden=false;$('status').textContent=`${data.support.length} eligible ${data.support.length===1?'population':'populations'} · ${index.species.length} species in the Atlas`;
     history.replaceState(null,'',`#species=${sp.species_id}`);render();
   }catch(err){if(token===request){$('status').textContent=`Data unavailable. ${err.message}`;$('status').classList.add('error');$('explorer').hidden=true;}}
 }
@@ -209,14 +241,26 @@ document.querySelectorAll('.plot-scroll').forEach(panel=>panel.addEventListener(
   document.querySelectorAll('.plot-scroll').forEach(other=>{if(other!==panel&&other.scrollLeft!==panel.scrollLeft)other.scrollLeft=panel.scrollLeft;});
 }));
 document.querySelectorAll('details.aligned').forEach(panel=>panel.addEventListener('toggle',()=>{if(panel.open)panel.querySelector('.plot-scroll').scrollLeft=$('survival-chart').parentElement.scrollLeft;}));
-$('species-search').addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();const found=index?.species.find(s=>[label(s),s.scientific_name,s.common_name||''].some(v=>v.toLowerCase()===q));if(found)choose(found);else $('status').textContent=q?'Choose a matching species from the suggestions.':'Enter an accepted scientific name.';});
+speciesSearch.addEventListener('focus',()=>{openSpeciesMenu({showAll:true});speciesSearch.select();});
+speciesSearch.addEventListener('input',e=>{request++;const q=e.target.value.trim();const matches=matchingSpecies(q);renderSpeciesOptions(matches);speciesOptions.hidden=false;speciesSearch.setAttribute('aria-expanded','true');speciesMenuToggle.setAttribute('aria-expanded','true');speciesMenuToggle.setAttribute('aria-label','Close species menu');$('status').textContent=q?(matches.length?`${matches.length} matching species · choose one to load it.`:'No species match that name.'):`${index.species.length} species available · begin typing or choose from the list.`;});
+speciesSearch.addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'){e.preventDefault();if(speciesOptions.hidden)openSpeciesMenu({showAll:true});setActiveSpecies(activeSpeciesIndex+1);}
+  else if(e.key==='ArrowUp'){e.preventDefault();if(speciesOptions.hidden)openSpeciesMenu({showAll:true});setActiveSpecies(activeSpeciesIndex<0?visibleSpecies.length-1:activeSpeciesIndex-1);}
+  else if(e.key==='Enter'){
+    const exact=index?.species.find(sp=>[label(sp),sp.scientific_name,sp.common_name||''].some(value=>value.toLowerCase()===speciesSearch.value.toLowerCase().trim()));
+    const selected=activeSpeciesIndex>=0?visibleSpecies[activeSpeciesIndex]:exact;
+    if(selected){e.preventDefault();selectSpecies(selected);}
+  }else if(e.key==='Escape'){closeSpeciesMenu();speciesSearch.select();}
+});
+speciesMenuToggle.addEventListener('click',()=>{if(speciesOptions.hidden){speciesSearch.focus({preventScroll:true});openSpeciesMenu({showAll:true});}else closeSpeciesMenu();});
+speciesOptions.addEventListener('click',e=>{const option=e.target.closest('[data-species-id]');if(option)selectSpecies(index.species.find(sp=>sp.species_id===Number(option.dataset.speciesId)));});
+document.addEventListener('click',e=>{if(!e.target.closest('.species-combobox'))closeSpeciesMenu();});
 function showTip(target,event){const node=target.closest('[data-tip]');if(!node)return;const t=$('tooltip');t.textContent=node.dataset.tip;t.hidden=false;const rect=node.getBoundingClientRect();let left=(event?.clientX??rect.x)+15,top=(event?.clientY??rect.y)+15;const box=t.getBoundingClientRect();t.style.left=Math.max(8,Math.min(left,innerWidth-box.width-10))+'px';t.style.top=Math.max(8,Math.min(top,innerHeight-box.height-10))+'px';}
 document.addEventListener('pointerover',e=>showTip(e.target,e));document.addEventListener('focusin',e=>showTip(e.target));document.addEventListener('click',e=>{if(e.target.closest('[data-tip]'))showTip(e.target,e);else $('tooltip').hidden=true;});document.addEventListener('pointerout',()=>{$('tooltip').hidden=true;});document.addEventListener('focusout',()=>{$('tooltip').hidden=true;});document.addEventListener('keydown',e=>{if(e.key==='Escape')$('tooltip').hidden=true;});
 (async()=>{
 try{
   [index,provenance]=await Promise.all([json('./data/index.json'),json('./data/provenance.json')]);
   if(provenance.status!=='PRODUCTION PASS'||provenance.accepted_attempt!==2)throw Error('Accepted posterior validation failed');
-  $('species-list').innerHTML=index.species.map(s=>`<option value="${escape(label(s))}"></option>`).join('');
   const fields={'Model':provenance.model,'Metric':'Apparent survival','Status':provenance.status,'Accepted fit':provenance.fit_version,'Retained draws':fmt(provenance.retained_draws),'Sampling Git SHA':provenance.git_sha,'Model SHA-256':provenance.model_sha,'Data SHA-256':provenance.data_sha,'Portable fit SHA-256':provenance.portable_fit_sha,'Research storage':provenance.research_root,'Updated':provenance.updated_date,'Interval support':provenance.support_rule,'Long-term estimate':provenance.long_term_rule,'QA':`0 divergences · 0 maximum-treedepth hits · max R-hat ${Number(provenance.qa.max_rhat).toFixed(4)} · minimum bulk ESS ${Number(provenance.qa.min_bulk).toFixed(1)}`};
   $('provenance-content').innerHTML='<dl>'+Object.entries(fields).map(([k,v])=>`<dt>${escape(k)}</dt><dd>${escape(v)}</dd>`).join('')+`</dl><p>Candidate common names and families were obtained by exact-name matching to <a href="${escape(provenance.taxonomy_source)}">Cornell’s eBird taxonomy</a>, retrieved 21 September 2026. An exact-name match does not establish matching taxonomic scope after splits or lumps. All common-name candidates are withheld pending scientific review. No taxonomic reassignment was made.</p><details><summary>Extraction software versions</summary><pre>${escape(provenance.software.join('\n'))}</pre></details>`;
   const wanted=Number(new URLSearchParams(location.hash.slice(1)).get('species'));await choose(index.species.find(s=>s.species_id===wanted)||index.species.find(s=>s.scientific_name==='Glyphorynchus spirurus')||index.species[0]);
