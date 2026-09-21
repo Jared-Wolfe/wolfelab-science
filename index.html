@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Draft homepage for the Wolfe Lab at Michigan Technological University">
 <title>Wolfe Lab — Wildlife Ecology</title>
+<link rel="stylesheet" href="/assets/mobile-nav.css">
+<script src="/assets/mobile-nav.js" defer></script>
 <style>
 :root {
   --background: #f4f0e6;
@@ -109,7 +111,10 @@ body { margin: 0; background: var(--background); }
   <header class="topbar">
     <div class="shell nav">
       <a class="brand" href="index.html"><strong>Wolfe Lab</strong><span>Wildlife Ecology</span></a>
-      <nav class="links" aria-label="Primary navigation">
+      <button class="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+        <span class="site-menu-icon" aria-hidden="true">☰</span><span class="site-menu-label">Menu</span>
+      </button>
+      <nav class="links" id="primary-menu" aria-label="Primary navigation">
         <a href="research.html">Research</a>
         <a href="people.html">People</a>
         <a href="publications.html">Publications</a>
