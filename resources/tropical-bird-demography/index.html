@@ -6,88 +6,8 @@
   <title>Tropical Bird Demography Explorer</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./style.css"><script type="module" src="./app.js"></script>
-  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
-<style>
-  body.explorer-locked{overflow:hidden;background:#f4f0e6}
-  body.explorer-locked>:not(#accessGate){visibility:hidden!important}
-  .access-gate{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;overflow:auto;padding:28px;background:linear-gradient(145deg,#102a21 0%,#17372b 58%,#244d3c 100%);color:#fffdf7}
-  .access-card{width:min(100%,510px);padding:clamp(30px,6vw,54px);border:1px solid rgba(255,255,255,.24);background:rgba(9,29,21,.8);box-shadow:0 24px 70px rgba(0,0,0,.28);backdrop-filter:blur(12px)}
-  .access-kicker{margin:0 0 18px;color:#e7c775;font-size:.72rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase}
-  .access-card h1{margin:0;font-family:Georgia,serif;font-size:clamp(2.35rem,8vw,4.2rem);font-weight:400;line-height:.96;letter-spacing:-.035em}
-  .access-copy{margin:22px 0 28px;color:rgba(255,255,255,.78);font-size:.96rem;line-height:1.7}
-  .access-form{display:grid;gap:16px}
-  .access-form label{display:grid;gap:7px;color:rgba(255,255,255,.82);font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-  .access-form input{width:100%;padding:14px 15px;border:1px solid rgba(255,255,255,.42);border-radius:2px;background:rgba(255,255,255,.09);color:#fff;font-size:1rem}
-  .access-form input:focus{outline:2px solid #e7c775;outline-offset:3px}
-  .access-submit{margin-top:4px;padding:14px 18px;border:1px solid #e7c775;border-radius:2px;background:#e7c775;color:#102a21;font-weight:750;cursor:pointer}
-  .access-submit:hover{background:#f3d98e}
-  .access-message{min-height:1.5em;margin:2px 0 0;color:#ffd2c6;font-size:.86rem;line-height:1.5}
-  .access-return{display:inline-block;margin-top:22px;color:rgba(255,255,255,.76);font-size:.84rem;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.45)}
-  .access-return:hover{color:#fff}
-  @media(max-width:520px){.access-gate{padding:18px}.access-card{padding:30px 24px}}
-</style>
 </head>
-<body class="explorer-locked">
-<section class="access-gate" id="accessGate" aria-labelledby="accessTitle">
-  <div class="access-card">
-    <p class="access-kicker">Private collaborator preview</p>
-    <h1 id="accessTitle">Tropical Bird Demography Explorer</h1>
-    <p class="access-copy">This research prototype is being shared with project collaborators for review. Enter the shared credentials to continue.</p>
-    <form class="access-form" id="accessForm">
-      <label>Username<input id="accessUsername" name="username" type="text" autocomplete="username" required></label>
-      <label>Password<input id="accessPassword" name="password" type="password" autocomplete="current-password" required></label>
-      <button class="access-submit" type="submit">Open the Explorer</button>
-      <p class="access-message" id="accessMessage" role="status" aria-live="polite"></p>
-    </form>
-    <a class="access-return" href="/resources/">← Return to Wolfe Lab resources</a>
-  </div>
-</section>
-<script>
-(() => {
-  const ACCESS_KEY = 'tbd-atlas-access-v1';
-  const EXPECTED_USER = 'collaborator';
-  const EXPECTED_HASH = 'a7cf50787fb3bc5fd3b8598a15f33cc2ad55c073b90b461104cd20d0578457db';
-  const gate = document.getElementById('accessGate');
-  const form = document.getElementById('accessForm');
-  const message = document.getElementById('accessMessage');
-  const username = document.getElementById('accessUsername');
-  const password = document.getElementById('accessPassword');
-
-  function unlock() {
-    document.body.classList.remove('explorer-locked');
-    gate.hidden = true;
-  }
-
-  async function sha256(value) {
-    const bytes = new TextEncoder().encode(value);
-    const digest = await crypto.subtle.digest('SHA-256', bytes);
-    return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
-  }
-
-  if (sessionStorage.getItem(ACCESS_KEY) === 'granted') {
-    unlock();
-  } else {
-    requestAnimationFrame(() => username.focus());
-  }
-
-  form.addEventListener('submit', async event => {
-    event.preventDefault();
-    message.textContent = 'Checking access…';
-    const validUser = username.value.trim().toLowerCase() === EXPECTED_USER;
-    const validPassword = await sha256(password.value);
-    if (validUser && validPassword === EXPECTED_HASH) {
-      sessionStorage.setItem(ACCESS_KEY, 'granted');
-      password.value = '';
-      unlock();
-      return;
-    }
-    password.value = '';
-    message.textContent = 'Those credentials were not recognized. Please try again.';
-    password.focus();
-  });
-})();
-</script>
-
+<body>
 <header class="masthead"><div><span class="brand">TROPICAL BIRD DEMOGRAPHY EXPLORER</span><span class="edition">SURVIVAL · RECRUITMENT · GROWTH</span></div></header>
 <main>
   <p class="review-notice" id="label-review">Taxonomy-corrected demographic estimates · Pradel recruitment and growth remain working-model estimates; see Model & provenance for limitations.</p>
