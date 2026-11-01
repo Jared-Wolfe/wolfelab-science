@@ -1,6 +1,6 @@
-import {METRICS,ymax,growthText,toCSV} from './metrics.js?v=7stations-73481-73737-20261101r2';
-import {segments,escape as esc,W,L,R,xScale,frame,axis,tip} from './charts.js?v=7stations-73481-73737-20261101r2';
-const RELEASE='7stations-73481-73737-20261101r2';
+import {METRICS,ymax,growthText,toCSV} from './metrics.js?v=7stations-73481-73737-20261101r3';
+import {segments,escape as esc,W,L,R,xScale,frame,axis,tip} from './charts.js?v=7stations-73481-73737-20261101r3';
+const RELEASE='7stations-73481-73737-20261101r3';
 const $=id=>document.getElementById(id),fmt=n=>Number(n).toLocaleString('en-US',{maximumFractionDigits:1}),prob=n=>Number(n).toFixed(3);
 let selectedMetric='apparent_survival';
 let index,provenance,data,enabled=new Set(),request=0;
@@ -86,7 +86,7 @@ function renderSpeciesLinks(sp){
     links.push('<a target="_blank" rel="noopener noreferrer" href="https://ebird.org/species/'+encodeURIComponent(code)+'">eBird ↗</a>');
     links.push('<a target="_blank" rel="noopener noreferrer" href="https://birdsoftheworld.org/bow/species/'+encodeURIComponent(code)+'/cur/introduction">Birds of the World ↗</a>');
   }
-  if(validName)links.push('<a target="_blank" rel="noopener noreferrer" href="https://xeno-canto.org/search?query='+encodeURIComponent(sp.scientific_name)+'">Xeno-canto recordings ↗</a>');
+  if(validName)links.push('<a target="_blank" rel="noopener noreferrer" href="https://xeno-canto.org/explore?query='+encodeURIComponent(sp.scientific_name)+'">Xeno-canto recordings ↗</a>');
   $('species-links').innerHTML='<div class="species-links-row"><span class="species-links-title">More about this species</span>'+links.join('')+'</div><p class="species-links-note">eBird and Birds of the World links use the approved eBird/Clements v2025 taxon code; some Birds of the World content requires a subscription. Xeno-canto searches the scientific name under its IOC-based taxonomy; verify split/lump differences before interpreting recordings.</p>';
 }
 async function choose(sp){
