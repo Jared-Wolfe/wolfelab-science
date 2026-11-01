@@ -1,6 +1,6 @@
-import {METRICS,ymax,growthText,toCSV} from './metrics.js?v=7stations-73481-73737-20261101';
-import {segments,escape as esc,W,L,R,xScale,frame,axis,tip} from './charts.js?v=7stations-73481-73737-20261101';
-const RELEASE='7stations-73481-73737-20261101';
+import {METRICS,ymax,growthText,toCSV} from './metrics.js?v=7stations-73481-73737-20261101r2';
+import {segments,escape as esc,W,L,R,xScale,frame,axis,tip} from './charts.js?v=7stations-73481-73737-20261101r2';
+const RELEASE='7stations-73481-73737-20261101r2';
 const $=id=>document.getElementById(id),fmt=n=>Number(n).toLocaleString('en-US',{maximumFractionDigits:1}),prob=n=>Number(n).toFixed(3);
 let selectedMetric='apparent_survival';
 let index,provenance,data,enabled=new Set(),request=0;
@@ -95,7 +95,7 @@ async function choose(sp){
     enabled=new Set(data.support.map(r=>r.station_id));$('family').textContent='eBird/Clements v2025 · '+sp.ebird_species_code;$('species-name').textContent=sp.common_name||sp.scientific_name;$('scientific-name').textContent=sp.scientific_name;renderSpeciesLinks(sp);
     $('station-toggles').innerHTML='<legend>Station legend <span>Toggle stations in all views</span></legend>'+data.support.map(r=>{const s=station(r.station_id);return `<label class="station-toggle" style="--station:${s.color}"><input type="checkbox" checked value="${s.station_id}" aria-label="Show ${esc(s.station_name)}"><svg class="station-mark" viewBox="0 0 32 10" aria-hidden="true"><path d="M0 5H32" stroke="${s.color}" stroke-width="3" stroke-dasharray="${s.dash}"/></svg>${esc(s.station_name)}</label>`}).join('');
     $('species-search').value=label(sp);$('explorer').hidden=false;$('status').textContent=`${data.support.length} eligible ${data.support.length===1?'population':'populations'} · ${index.species.length} species in the Atlas`;
-    history.replaceState(null,'',`#species=${sp.species_id}`);render();
+    history.replaceState(null,'',`#species=${encodeURIComponent(sp.ebird_species_code)}`);render();
   }catch(err){if(token===request){$('status').textContent=`Data unavailable. ${err.message}`;$('status').classList.add('error');$('explorer').hidden=true;}}
 }
 $('station-toggles').addEventListener('change',e=>{if(e.target.checked)enabled.add(e.target.value);else enabled.delete(e.target.value);render();});
@@ -113,5 +113,7 @@ try{
   [index,provenance]=await Promise.all([json('./data/index.json'),json('./data/provenance.json')]);
   if(index.schema_version!=='3.1.0'||provenance.dataset!=='EXPANDED_SEVEN_STATION_20261023'||index.species.length!==126||index.stations.length!==7||provenance.counts.cells!==264||Object.values(provenance.counts.annual_keys_per_metric).some(n=>n!==8236)||Object.values(METRICS).some(m=>!provenance.models[m.source]))throw Error('Seven-station source validation failed');
   $('species-list').innerHTML=index.species.map(s=>`<option value="${esc(label(s))}"></option>`).join('');
-  const wanted=Number(new URLSearchParams(location.hash.slice(1)).get('species'));await choose(index.species.find(s=>s.species_id===wanted)||index.species.find(s=>s.scientific_name==='Glyphorynchus spirurus')||index.species[0]);
+  const requested=new URLSearchParams(location.hash.slice(1)).get('species');
+  const wanted=index.legacy_species_codes?.[requested]||requested;
+  await choose(index.species.find(s=>s.ebird_species_code===wanted)||index.species.find(s=>s.scientific_name==='Glyphorynchus spirurus')||index.species[0]);
 }catch(err){$('status').textContent=`Unable to load the Atlas: ${err.message}. Serve this folder over HTTP using the README instructions.`;$('status').classList.add('error');}

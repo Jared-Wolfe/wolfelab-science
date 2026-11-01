@@ -16,3 +16,5 @@ CJS remains ACCEPT_WITH_BDFFP_DATA_CAUTION. Pradel remains ACCEPT_WITH_RECRUITME
 The prior interrupted chat did not leave a committed website update. This release rebuilds from the verified source package and publishes the complete file set together.
 
 The HTML entry point, JavaScript module imports, and JSON requests use a shared release version in their URLs. This prevents a returning visitor's cached five-station scripts or data from mixing with the seven-station release.
+
+Species links now use approved eBird taxon codes. All 113 numeric bookmarks from the previous release map through its original species index, preserving species identity when expanded-model integer IDs change.
