@@ -14,3 +14,5 @@ All package hashes passed. Every published annual and long-term mean, median, q0
 CJS remains ACCEPT_WITH_BDFFP_DATA_CAUTION. Pradel remains ACCEPT_WITH_RECRUITMENT_CAUTION. Sparse or gap-adjacent recruitment intervals and temporal variance allocation require caution. The interface and provenance retain those limitations. Seven stations represent four climate regions, not seven independent climate replicates.
 
 The prior interrupted chat did not leave a committed website update. This release rebuilds from the verified source package and publishes the complete file set together.
+
+The HTML entry point, JavaScript module imports, and JSON requests use a shared release version in their URLs. This prevents a returning visitor's cached five-station scripts or data from mixing with the seven-station release.

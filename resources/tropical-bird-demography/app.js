@@ -1,10 +1,11 @@
-import {METRICS,ymax,growthText,toCSV} from './metrics.js';
-import {segments,escape as esc,W,L,R,xScale,frame,axis,tip} from './charts.js';
+import {METRICS,ymax,growthText,toCSV} from './metrics.js?v=7stations-73481-73737-20261101';
+import {segments,escape as esc,W,L,R,xScale,frame,axis,tip} from './charts.js?v=7stations-73481-73737-20261101';
+const RELEASE='7stations-73481-73737-20261101';
 const $=id=>document.getElementById(id),fmt=n=>Number(n).toLocaleString('en-US',{maximumFractionDigits:1}),prob=n=>Number(n).toFixed(3);
 let selectedMetric='apparent_survival';
 let index,provenance,data,enabled=new Set(),request=0;
 const cache=new Map();
-async function json(url){const r=await fetch(url);if(!r.ok)throw Error(`Cannot load ${url} (${r.status})`);return r.json();}
+async function json(url){const r=await fetch(`${url}${url.includes('?')?'&':'?'}v=${RELEASE}`);if(!r.ok)throw Error(`Cannot load ${url} (${r.status})`);return r.json();}
 const label=sp=>sp.common_name?`${sp.common_name} — ${sp.scientific_name}`:sp.scientific_name;
 const station=id=>index.stations.find(s=>s.station_id===id);
 function estimate(r){return `${prob(r.median)} [${prob(r.q05)}–${prob(r.q95)}]`;}
